@@ -1,8 +1,12 @@
 require('dotenv').config();
+const userRouters = require('../routers/usersRouter')
 
 //import express
 const express = require('express');
 const app = express();
+
+//routers
+app.use('/api/v1', userRouters);
 
 app.get('/api/v1/data', (req,res)=>{
     res.send('Task App')
