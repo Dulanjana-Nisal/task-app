@@ -11,11 +11,22 @@ const userRegisterController = asyncErrorHaddler(async (req,res)=>{
 
 //login users
 const userLoginController = asyncErrorHaddler(async(req,res)=>{
-    const userLogin = await Users.findOne({email: req.body.email})
+    const {email,password} = req.body
+    const userLogin = await Users.findOne({email: email})
+
+    //check email and password
+    if(!email || !password){
+        throw new BadrequestErrorHaddler('Please provide email and password!')
+    }
+
+    // check email is in db
     if(!userLogin){
         throw new BadrequestErrorHaddler('User not registerd!')
     }
-    res.status(statusCodes.OK).json({success: true, data: userLogin})
+
+    //userlogin
+    const token = await userLogin.createJWT(userLogin)
+    res.status(statusCodes.OK).json({success: true, data: userLogin, token: token})
 })
 
 module.exports = {
