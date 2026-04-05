@@ -6,6 +6,7 @@ const userRegisterController = asyncErrorHaddler(async (req,res)=>{
     const registerUser = await Users.create(req.body)
     res.status(200).send(registerUser)
 })
+
 //login users
 const userLoginController = (req,res)=>{
     res.status(200).send('Login users')

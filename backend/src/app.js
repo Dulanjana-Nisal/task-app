@@ -9,7 +9,6 @@ const app = express();
 
 //middleware
 app.use(express.json());
-app.use(errorHaddlerMiddleware);
 
 //routers
 app.use('/api/v1', userRouters);
@@ -17,6 +16,9 @@ app.use('/api/v1', userRouters);
 app.get('/api/v1/data', (req,res)=>{
     res.send('Task App')
 })
+
+//errors haddler
+app.use(errorHaddlerMiddleware);
 
 //connections
 const PORT = process.env.PORT || 5001;
