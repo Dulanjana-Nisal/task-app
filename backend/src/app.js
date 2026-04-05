@@ -1,6 +1,7 @@
 require('dotenv').config();
 const dbConnection = require('../db/server');
 const errorHaddlerMiddleware = require('../middleware/errorHaddlerMiddlewre');
+const notfoundMiddleware = require('../middleware/notfoundMiddleware');
 const userRouters = require('../routers/usersRouter')
 
 //import express
@@ -19,6 +20,7 @@ app.get('/api/v1/data', (req,res)=>{
 
 //errors haddler
 app.use(errorHaddlerMiddleware);
+app.use(notfoundMiddleware)
 
 //connections
 const PORT = process.env.PORT || 5001;
