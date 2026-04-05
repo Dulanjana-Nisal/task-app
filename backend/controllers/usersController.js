@@ -1,6 +1,7 @@
 const Users = require('../models/userModels')
 const asyncErrorHaddler = require('../utils/asyncHaddler')
 const BadrequestErrorHaddler = require('../errors/BadrequestErrorHadder')
+const NotfoundErrorHaddler = require('../errors/NotfoundErrorHaddler')
 const statusCodes = require('http-status-codes')
 
 //user register
@@ -18,17 +19,14 @@ const userLoginController = asyncErrorHaddler(async(req,res)=>{
     if(!email || !password){
         throw new BadrequestErrorHaddler('Please provide email and password!')
     }
-
     // check email is in db
     if(!userLogin){
-        throw new BadrequestErrorHaddler('User not registerd!')
+        throw new NotfoundErrorHaddler('User not Found!')
     }
-
     //check password
     if(!(await userLogin.dehashPassword(password))){
         throw new BadrequestErrorHaddler('Password incorrect!')
     }
-
     //userlogin
     const token = await userLogin.createJWT(userLogin)
     res.status(statusCodes.OK).json({success: true, data: userLogin, token: token})
