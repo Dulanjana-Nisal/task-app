@@ -17,3 +17,19 @@
 3.if all good create jwt
 4.retern dashboard
 
+### jobs
+1.create job (post)
+2.get all job (get)
+3.get single job (get)
+4.update job (patch)
+5.delete job (delete)
+
+1.create schema
+2.create controllers 
+
+`Create schema`
+1.title
+2.description
+3.isdone
+4.created date (auto)
+5.created by (user/forigenkey - users: _id)
