@@ -5,7 +5,8 @@
 
 1.check all inputs is right 
 2.if error respose it json 
-3.create user in database
+3.password must hash
+4.create user in database
 
 ### user login
 -email

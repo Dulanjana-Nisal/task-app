@@ -1,5 +1,7 @@
 const Users = require('../models/userModels')
 const asyncErrorHaddler = require('../utils/asyncHaddler')
+const BadrequestErrorHaddler = require('../errors/BadrequestErrorHadder')
+const statusCodes = require('http-status-codes')
 
 //user register
 const userRegisterController = asyncErrorHaddler(async (req,res)=>{
@@ -8,9 +10,13 @@ const userRegisterController = asyncErrorHaddler(async (req,res)=>{
 })
 
 //login users
-const userLoginController = (req,res)=>{
-    const userLogin = await 
-}
+const userLoginController = asyncErrorHaddler(async(req,res)=>{
+    const userLogin = await Users.findOne({email: req.body.email})
+    if(!userLogin){
+        throw new BadrequestErrorHaddler('User not registerd!')
+    }
+    res.status(statusCodes.OK).json({success: true, data: userLogin})
+})
 
 module.exports = {
     userRegisterController,
