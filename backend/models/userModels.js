@@ -1,24 +1,44 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-const JobsSchema = mongoose.Schema({
-    title: {
+const UsersSchema = mongoose.Schema({
+    name: {
         type: String,
-        minLength: [3, 'Title must be more than 3 letters'],
+        minLength: [3, 'User name must be more than 3 letters'],
+        maxLength: [20, 'User name must be less than 20 letters'],
+        required: [true, 'Please provide a name!']
+    },
+    email: {
+        type: String,
+        required: [true, 'Please procide a Email!'],
+        lowercase: true,
         trim: true,
-        maxLength: [20, 'Title name must be less than 20 letters'],
-        required: [true, 'Please provide a Title for job!']
+        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, "Please use a valid email address"],
+        unique: true
     },
-    description: {
+    password: {
         type: String,
-        required: [true, 'Please provide a description for your task!'],
-        maxLength: [100, 'Description name must be less than 100 letters'],
-        minLength: [3, 'Description must be more than 3 letters'],
-    },
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'users'
+        required: [true, 'Please provide a password'],
+        minLength: [6, 'Password must be more than 3 characters'],
     }
-}, {timestamps: true})
+})
 
-module.exports = mongoose.model('jobs', JobsSchema)
+// hashing password
+UsersSchema.pre('save', async function(){
+    const salt = await bcrypt.genSalt(10)
+    const hashPass = await bcrypt.hash(this.password, salt)
+    this.password = hashPass
+})
+
+//create JWT token
+UsersSchema.methods.createJWT = function(user){
+    return jwt.sign({id: user._id, name: user.name, email: user.email}, process.env.JWT_SECRET, {expiresIn: '7d'})
+}
+
+//password deHshing
+UsersSchema.methods.dehashPassword = async function(userPassword){
+    return await bcrypt.compare(userPassword, this.password)
+}
+
+module.exports = mongoose.model('users', UsersSchema)
