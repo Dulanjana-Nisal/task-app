@@ -16,8 +16,8 @@ app.get('/api/v1/data', (req,res)=>{
 //connections
 const PORT = process.env.PORT || 5001;
 const connection = async ()=>{
-    try{
-        await dbConnection()
+    try{ 
+        await dbConnection(process.env.mongo_URI)
         app.listen(PORT, ()=>{console.log(`Server running from port ${PORT}`)});
     }
     catch(error){
