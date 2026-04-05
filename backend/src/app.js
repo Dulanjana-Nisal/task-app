@@ -1,10 +1,15 @@
 require('dotenv').config();
 const dbConnection = require('../db/server');
+const errorHaddlerMiddleware = require('../middleware/errorHaddlerMiddlewre');
 const userRouters = require('../routers/usersRouter')
 
 //import express
 const express = require('express');
 const app = express();
+
+//middleware
+app.use(express.json());
+app.use(errorHaddlerMiddleware);
 
 //routers
 app.use('/api/v1', userRouters);
