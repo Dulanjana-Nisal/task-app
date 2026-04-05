@@ -1,4 +1,5 @@
 require('dotenv').config();
+const dbConnection = require('../db/server');
 const userRouters = require('../routers/usersRouter')
 
 //import express
@@ -16,6 +17,7 @@ app.get('/api/v1/data', (req,res)=>{
 const PORT = process.env.PORT || 5001;
 const connection = async ()=>{
     try{
+        await dbConnection()
         app.listen(PORT, ()=>{console.log(`Server running from port ${PORT}`)});
     }
     catch(error){
