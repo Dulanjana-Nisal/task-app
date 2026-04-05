@@ -24,6 +24,11 @@ const userLoginController = asyncErrorHaddler(async(req,res)=>{
         throw new BadrequestErrorHaddler('User not registerd!')
     }
 
+    //check password
+    if(!(await userLogin.dehashPassword(password))){
+        throw new BadrequestErrorHaddler('Password incorrect!')
+    }
+
     //userlogin
     const token = await userLogin.createJWT(userLogin)
     res.status(statusCodes.OK).json({success: true, data: userLogin, token: token})
