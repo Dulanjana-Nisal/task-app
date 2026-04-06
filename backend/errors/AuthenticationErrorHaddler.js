@@ -1,7 +1,7 @@
 const CustomErrorHaddler = require("./CustomErrorHaddler");
 const statusCodes = require('http-status-codes')
 
-class AuthenticationErrorHadder extends CustomErrorHaddler{
+class AuthenticationErrorHaddler extends CustomErrorHaddler{
     constructor(message){
         super(message)
         this.status = statusCodes.UNAUTHORIZED
@@ -9,4 +9,4 @@ class AuthenticationErrorHadder extends CustomErrorHaddler{
     }
 }
 
-module.exports = AuthenticationErrorHadder;
+module.exports = AuthenticationErrorHaddler;

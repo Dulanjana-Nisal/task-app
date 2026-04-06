@@ -1,3 +1,5 @@
+const Jobs = require('../models/jobModels');
+const asyncErrorHaddler = require('../utils/asyncHaddler')
 const statusCodes = require('http-status-codes')
 
 //get all jobs
@@ -6,9 +8,13 @@ const getAllJobs = (req,res)=>{
 }
 
 //create jobs
-const createJobs = (req,res)=>{
-    res.status(statusCodes.OK).send('Create jobs')
-}
+const createJobs = asyncErrorHaddler(async (req,res)=>{
+    const {title, description} = req.body;
+    // req.body.createdBy = req.user.id
+    console.log(req.user.id)
+    const createJob = await Jobs.create({title: title, description: description})
+    res.status(statusCodes.OK).json({success: true, data: createJob})
+})
 
 //get single jobs
 const getSingleJobs = (req,res)=>{
