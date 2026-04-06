@@ -14,6 +14,9 @@ const createTasks = asyncErrorHaddler(async (req,res)=>{
     if(!req.body.title){
         throw new BadrequestErrorHaddler('PLease Provide a Title for job')
     }
+    if(!req.body.description){
+        throw new BadrequestErrorHaddler('PLease Provide a description for job')
+    }
     const createJob = await Jobs.create(req.body);
     res.status(statusCodes.OK).json({success: true, data: createJob})
 })

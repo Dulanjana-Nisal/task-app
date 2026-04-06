@@ -17,7 +17,7 @@ const authenticationMiddleware = (req,res,next)=>{
     }
 
     //create user
-    req.user = {id:'69d2d15cdf2a57366c078909', name:'user 2', email:'user2@gmail.com',}
+    req.user = {id:user.id, name: user.name, email:user.email}
     next();
 }  
 module.exports = authenticationMiddleware;
