@@ -3,7 +3,7 @@ const dbConnection = require('../db/server');
 const errorHaddlerMiddleware = require('../middleware/errorHaddlerMiddlewre');
 const notfoundMiddleware = require('../middleware/notfoundMiddleware');
 const userRouters = require('../routers/usersRouter')
-const jobRouters = require('../routers/jobsRouter')
+const taskRouters = require('../routers/tasksRouter')
 
 //import express
 const express = require('express');
@@ -14,7 +14,7 @@ app.use(express.json());
 
 //routers
 app.use('/api/v1/user', userRouters);
-app.use('/api/v1/jobs', jobRouters);
+app.use('/api/v1/tasks', taskRouters);
 
 app.get('/api/v1/data', (req,res)=>{
     res.send('Task App')

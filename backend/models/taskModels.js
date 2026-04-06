@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const JobsSchema = mongoose.Schema({
+const TasksSchema = mongoose.Schema({
     title: {
         type: String,
         minLength: [3, 'Title must be more than 3 letters'],
@@ -21,4 +21,4 @@ const JobsSchema = mongoose.Schema({
     }
 }, {timestamps: true})
 
-module.exports = mongoose.model('jobs', JobsSchema)
+module.exports = mongoose.model('tasks', TasksSchema)
