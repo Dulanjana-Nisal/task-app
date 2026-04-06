@@ -33,7 +33,7 @@ UsersSchema.pre('save', async function(){
 
 //create JWT token
 UsersSchema.methods.createJWT = function(user){
-    return jwt.sign({id: user._id, name: user.name, email: user.email}, process.env.JWT_SECRET, {expiresIn: '7d'})
+    return jwt.sign({id: user._id, name: user.name, email: user.email}, process.env.JWT_SECRET, {expiresIn: '10h'})
 }
 
 //password deHshing

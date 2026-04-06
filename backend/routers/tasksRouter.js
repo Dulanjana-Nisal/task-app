@@ -5,6 +5,6 @@ const router = express.Router();
 
 //create routers
 router.route('').get(authenticationMiddleware, getAllTasks).post(authenticationMiddleware, createTasks);
-router.route('/:id').get(getSingleTasks).patch(updateTasks).delete(deleteTasks);
+router.route('/:id').get(authenticationMiddleware, getSingleTasks).patch(authenticationMiddleware, updateTasks).delete(authenticationMiddleware, deleteTasks);
 
 module.exports = router;
