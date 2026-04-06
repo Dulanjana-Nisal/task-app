@@ -14,6 +14,10 @@ const TasksSchema = mongoose.Schema({
         maxLength: [100, 'Description name must be less than 100 letters'],
         minLength: [3, 'Description must be more than 3 letters'],
     },
+    isDone: {
+        type: Boolean,
+        default: false
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

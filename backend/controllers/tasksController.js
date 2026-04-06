@@ -18,10 +18,10 @@ const getAllTasks = asyncErrorHaddler(async (req, res) => {
 const createTasks = asyncErrorHaddler(async (req, res) => {
     req.body.createdBy = req.user.id;
     if (!req.body.title) {
-        throw new BadrequestErrorHaddler('PLease Provide a Title for job')
+        throw new BadrequestErrorHaddler('Please Provide a Title for task')
     }
     if (!req.body.description) {
-        throw new BadrequestErrorHaddler('PLease Provide a description for job')
+        throw new BadrequestErrorHaddler('Please Provide a description for task')
     }
     const createJob = await Tasks.create(req.body);
     res.status(statusCodes.CREATED).json({ success: true, data: createJob })
@@ -40,9 +40,19 @@ const getSingleTasks = asyncErrorHaddler(async (req, res) => {
 })
 
 //update tasks
-const updateTasks = (req, res) => {
-    res.status(statusCodes.OK).send('Update jobs')
-}
+const updateTasks = asyncErrorHaddler(async (req, res) => {
+    const paramId = req.params.id
+    const {title,description} = req.body;
+
+    if(!title || !description){
+        throw new BadrequestErrorHaddler('Please Provide values!')
+    }
+    const update = await Tasks.findOneAndUpdate({_id: paramId},req.body,{new: true, })
+    if(!update){
+        throw new BadrequestErrorHaddler('Update Error!')
+    }
+    res.status(statusCodes.OK).send({success: true, data: update})
+})
 
 //delete tasks
 const deleteTasks = asyncErrorHaddler(async(req, res) => {
