@@ -1,4 +1,5 @@
-import './login.css'
+import './login.css';
+import close_eye from '../../assets/svgs/close-eye.svg'
 
 const Login = ()=>{
     return(
@@ -17,7 +18,7 @@ const Login = ()=>{
                         <div class="password">
                             <label for="name">Password</label><br />
                             <input type="password" placeholder="Enter your Password" />
-                            <img src="../images/svgs/close-eye.svg" alt="close-eye" class="close-eye" />
+                            <img src={close_eye} alt="close-eye" class="close-eye" />
                             <img src="../images/svgs/open-eye.svg" alt="open-eye" class="open-eye" />
                         </div>
                         <div class="messages">
