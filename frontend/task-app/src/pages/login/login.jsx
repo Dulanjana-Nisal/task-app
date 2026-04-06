@@ -1,7 +1,16 @@
 import './login.css';
-import close_eye from '../../assets/svgs/close-eye.svg'
+import close_eye from '../../assets/svgs/close-eye.svg';
+import open_eye from '../../assets/svgs/open-eye.svg';
+import { useState } from 'react';
 
-const Login = ()=>{
+function Login(){
+    const [visible,setVisible] = useState(false);
+
+    //visible button
+    function changeVidible(){
+        visible ? setVisible(false) : setVisible(true)
+    }
+
     return(
         <div class="container">
             <div class="login-form">
@@ -17,8 +26,8 @@ const Login = ()=>{
                         </div>
                         <div class="password">
                             <label for="name">Password</label><br />
-                            <input type="password" placeholder="Enter your Password" />
-                            <img src={close_eye} alt="close-eye" class="close-eye" />
+                            <input type={visible ? `password` : 'text'} placeholder="Enter your Password" />
+                            <img src={visible ? close_eye : open_eye} alt="close-eye" class="close-eye" onClick={changeVidible}/>
                             <img src="../images/svgs/open-eye.svg" alt="open-eye" class="open-eye" />
                         </div>
                         <div class="messages">
