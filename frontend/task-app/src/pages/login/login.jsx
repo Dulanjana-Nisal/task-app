@@ -2,9 +2,26 @@ import './login.css';
 import close_eye from '../../assets/svgs/close-eye.svg';
 import open_eye from '../../assets/svgs/open-eye.svg';
 import { useState } from 'react';
+import axios from 'axios';
 
 function Login(){
-    const [visible,setVisible] = useState(false);
+    const [visible,setVisible] = useState(true);
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+
+    //post login information
+    const userLogin = async (e)=>{
+        e.preventDefault();
+        try{
+            const user = await axios.post("http://localhost:5001/api/v1/user/login", {email,password})
+            console.log(user)
+            localStorage.setItem('token', user.data.token);
+            
+        }
+        catch(err){ 
+            console.log(err.message)
+        }
+    }
 
     //visible button
     function changeVidible(){
@@ -19,16 +36,15 @@ function Login(){
                     <p>Please enter your details for login</p>
                 </div>
                 <div class="form-body">
-                    <form action="#" method="post">
+                    <form onSubmit={userLogin}>
                         <div class="email">
                             <label for="name">Email</label><br />
-                            <input type="email" placeholder="Enter your Email" />
+                            <input type="email" value={email} placeholder="Enter your Email" onChange={(e)=>setEmail(e.target.value)}/>
                         </div>
                         <div class="password">
                             <label for="name">Password</label><br />
-                            <input type={visible ? `password` : 'text'} placeholder="Enter your Password" />
+                            <input type={visible ? `password` : 'text'} placeholder="Enter your Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                             <img src={visible ? close_eye : open_eye} alt="close-eye" class="close-eye" onClick={changeVidible}/>
-                            <img src="../images/svgs/open-eye.svg" alt="open-eye" class="open-eye" />
                         </div>
                         <div class="messages">
                             <p>Some Error messages here</p>

@@ -4,6 +4,7 @@ const errorHaddlerMiddleware = require('../middleware/errorHaddlerMiddlewre');
 const notfoundMiddleware = require('../middleware/notfoundMiddleware');
 const userRouters = require('../routers/usersRouter')
 const taskRouters = require('../routers/tasksRouter')
+const cors = require('cors')
 
 //import express
 const express = require('express');
@@ -11,6 +12,7 @@ const app = express();
 
 //middleware
 app.use(express.json());
+app.use(cors());
 
 //routers
 app.use('/api/v1/user', userRouters);
