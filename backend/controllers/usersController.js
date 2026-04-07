@@ -21,7 +21,7 @@ const userLoginController = asyncErrorHaddler(async(req,res)=>{
     }
     // check email is in db
     if(!userLogin){
-        throw new NotfoundErrorHaddler('User not Found!')
+        throw new NotfoundErrorHaddler('Email not Found!')
     }
     //check password
     if(!(await userLogin.dehashPassword(password))){

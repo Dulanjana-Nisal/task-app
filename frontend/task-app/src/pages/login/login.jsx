@@ -8,6 +8,7 @@ function Login(){
     const [visible,setVisible] = useState(true);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const [errMsg,setErrMsg] = useState(null)
 
     //post login information
     const userLogin = async (e)=>{
@@ -16,10 +17,11 @@ function Login(){
             const user = await axios.post("http://localhost:5001/api/v1/user/login", {email,password})
             console.log(user)
             localStorage.setItem('token', user.data.token);
-            
+            setErrMsg(null)
         }
         catch(err){ 
-            console.log(err.message)
+            setErrMsg(err.response.data.message)
+            console.log(err.response.data.message)
         }
     }
 
@@ -46,9 +48,12 @@ function Login(){
                             <input type={visible ? `password` : 'text'} placeholder="Enter your Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                             <img src={visible ? close_eye : open_eye} alt="close-eye" class="close-eye" onClick={changeVidible}/>
                         </div>
-                        <div class="messages">
-                            <p>Some Error messages here</p>
-                        </div>
+                        {
+                            errMsg &&
+                            <div class="messages">
+                                <p>{errMsg}</p>
+                            </div>
+                        }
                         <div class="btn">
                             <input type="submit" value="Sign in" />
                         </div>
