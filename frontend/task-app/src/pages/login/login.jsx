@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import LoginHeader from './loginHeader';
 import LoginBody from './loginBody';
 import LoginFooter from './loginFooter';
-import userApiLogin from '../../api/userApi';
+import {userApiLogin} from '../../api/userApi';
 
 function Login(){
 

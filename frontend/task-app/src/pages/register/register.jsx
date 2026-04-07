@@ -1,10 +1,10 @@
 import './register.css';
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import RegisterHeader from './registerHeader';
 import RegisterFooter from './registerFooter';
 import RegisterBody from './registerBody';
+import {userApiRegister} from '../../api/userApi';
 
 function Register() {
     const [visible, setVisible] = useState(true);
@@ -17,16 +17,7 @@ function Register() {
     //post register information
     const userRegister = async (e) => {
         e.preventDefault();
-        try {
-            const user = await axios.post("http://localhost:5001/api/v1/user/register", {name, email, password })
-            console.log(user)
-            setErrMsg(null)
-            navigate('/login')
-        }
-        catch (err) {
-            console.log(err.response.data.message)
-            setErrMsg(err.response.data.message)
-        }
+        userApiRegister(name,email,password,setErrMsg,navigate)
     }
 
     return (
