@@ -43,7 +43,6 @@
     right: 30px;
     top: 80px;
     border-radius: 15px;
-    display: none;
 }
 .dashboard-container .dashboard-header .profile p{
     font-size: 16px;
@@ -177,7 +176,6 @@
     align-items: center;
     justify-content: center;
     background-color: #000;
-    display: none;
 }
 .dashboard-container .update-task form{
     background-color: #fff;
@@ -208,7 +206,6 @@
     color: #D2042D;
     font-size: 14px;
     font-weight: 600;
-    display: none;
 }
 .dashboard-container .update-task form .submit-btn, button{
     display: flex;
@@ -236,7 +233,6 @@
     align-items: center;
     justify-content: center;
     background-color: #000;
-    display: none;
 }
 .dashboard-container .add-task form{
     background-color: #fff;
@@ -267,7 +263,6 @@
     color: #D2042D;
     font-size: 14px;
     font-weight: 600;
-    display: none;
 }
 .dashboard-container .add-task form .add-btn, button{
     display: flex;
