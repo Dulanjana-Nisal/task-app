@@ -1,7 +1,8 @@
 import close_eye from '../../assets/svgs/close-eye.svg';
 import open_eye from '../../assets/svgs/open-eye.svg';
+import changeVidible from '../../utils/buttons'
 
-function LoginBody({userLogin,email,setEmail,visible,setPassword,password,changeVidible,errMsg}) {
+function LoginBody({userLogin,email,setEmail,visible,setPassword,password,errMsg,setVisible}) {
     return (
         <div class="form-body">
             <form onSubmit={userLogin}>
@@ -12,7 +13,7 @@ function LoginBody({userLogin,email,setEmail,visible,setPassword,password,change
                 <div class="password">
                     <label for="name">Password</label><br />
                     <input type={visible ? `password` : 'text'} placeholder="Enter your Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <img src={visible ? close_eye : open_eye} alt="close-eye" class="close-eye" onClick={changeVidible} />
+                    <img src={visible ? close_eye : open_eye} alt="close-eye" class="close-eye" onClick={()=>changeVidible(visible,setVisible)} />
                 </div>
                 {
                     errMsg &&

@@ -7,7 +7,7 @@ import LoginBody from './loginBody';
 import LoginFooter from './loginFooter';
 
 function Login(){
-    
+
     const [visible,setVisible] = useState(true);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -29,16 +29,11 @@ function Login(){
         }
     }
 
-    //visible button
-    function changeVidible(){
-        visible ? setVisible(false) : setVisible(true)
-    }
-
     return(
         <div class="container">
             <div class="login-form">
                 <LoginHeader />
-                <LoginBody userLogin={userLogin} email={email} setEmail={setEmail} visible={visible} setPassword={setPassword} password={password} changeVidible={changeVidible} errMsg={errMsg} />
+                <LoginBody userLogin={userLogin} email={email} setEmail={setEmail} visible={visible} setPassword={setPassword} password={password} setVisible={setVisible} errMsg={errMsg} />
                 <LoginFooter />
             </div>
         </div>
