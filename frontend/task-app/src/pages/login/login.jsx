@@ -1,11 +1,13 @@
 import './login.css';
-import close_eye from '../../assets/svgs/close-eye.svg';
-import open_eye from '../../assets/svgs/open-eye.svg';
 import { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import LoginHeader from './loginHeader';
+import LoginBody from './loginBody';
+import LoginFooter from './loginFooter';
 
 function Login(){
+    
     const [visible,setVisible] = useState(true);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -35,35 +37,9 @@ function Login(){
     return(
         <div class="container">
             <div class="login-form">
-                <div class="form-header">
-                    <h1>Welcome Back !</h1>
-                    <p>Please enter your details for login</p>
-                </div>
-                <div class="form-body">
-                    <form onSubmit={userLogin}>
-                        <div class="email">
-                            <label for="name">Email</label><br />
-                            <input type="email" value={email} placeholder="Enter your Email" onChange={(e)=>setEmail(e.target.value)}/>
-                        </div>
-                        <div class="password">
-                            <label for="name">Password</label><br />
-                            <input type={visible ? `password` : 'text'} placeholder="Enter your Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-                            <img src={visible ? close_eye : open_eye} alt="close-eye" class="close-eye" onClick={changeVidible}/>
-                        </div>
-                        {
-                            errMsg &&
-                            <div class="messages">
-                                <p>{errMsg}</p>
-                            </div>
-                        }
-                        <div class="btn">
-                            <input type="submit" value="Sign in" />
-                        </div>
-                    </form>
-                </div>
-                <div class="form-footer">
-                    <p>Dont have an account <Link to="/register">Register</Link></p>
-                </div>
+                <LoginHeader />
+                <LoginBody userLogin={userLogin} email={email} setEmail={setEmail} visible={visible} setPassword={setPassword} password={password} changeVidible={changeVidible} errMsg={errMsg} />
+                <LoginFooter />
             </div>
         </div>
     )
