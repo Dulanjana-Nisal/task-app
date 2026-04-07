@@ -8,13 +8,15 @@ import { useEffect, useState } from 'react';
 
 function Dashboard() {
 
-    const [userTasks,setUserTasks] = useState([])
+    const [userData,setUserData] = useState([])
+    const [taskData,setTaskData] = useState([])
 
     useEffect( ()=>{
         async function fetchTasks(){
             try{
                 const userTask = await api.get('/tasks')
-                setUserTasks(userTask)
+                setUserData(userTask.data.user)
+                setTaskData(userTask.data.data)
             }
             catch(err){
                 console.log(err)
@@ -22,8 +24,7 @@ function Dashboard() {
         }
         fetchTasks();
     }, [])
-
-    console.log(userTasks)
+    console.log(taskData)
 
     return (
         <>
@@ -34,10 +35,10 @@ function Dashboard() {
                     </div>
                     <div class="header-right">
                         <img src={userSvg} alt="user-profile" />
-                        <h1>Dulanjana Nisal</h1>
+                        <h1>{userData.name}</h1>
                     </div>
                     <div class="profile">
-                        <p>dulanjananisal67@gmail.com</p>
+                        <p>{userData.email}</p>
                         <button>Logout</button>
                     </div>
                 </div>
@@ -46,22 +47,28 @@ function Dashboard() {
                         <button> <img src={plusSvg} alt="" />Create Task</button>
                     </div>
                     <div class="body-bottom">
-                        <div class="task-card">
-                            <div class="card-head">
-                                <h1>Task Name</h1>
-                                <p>This is test task for task app dashboard</p>
-                                <p class="status">Pending</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-body-left">
-                                    <button class="edit-btn"><img src={editSvg} alt="" /></button>
-                                    <button class="delete-btn"><img src={deleteSvg} alt="" /></button>
-                                </div>
-                                <div class="card-body-right">
-                                    <p>2026.01.03</p>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            taskData.map((tasks)=>{
+                                return(
+                                    <div class="task-card" key={tasks._id}>
+                                        <div class="card-head">
+                                            <h1>{tasks.title}</h1>
+                                            <p>{tasks.description}</p>
+                                            <p class="status">{tasks.isDone === true ? 'Finished' : 'Pending'}</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-body-left">
+                                                <button class="edit-btn"><img src={editSvg} alt="" /></button>
+                                                <button class="delete-btn"><img src={deleteSvg} alt="" /></button>
+                                            </div>
+                                            <div class="card-body-right">
+                                                <p>{tasks.updatedAt.slice(0, 10)}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
                 <div class="add-task">

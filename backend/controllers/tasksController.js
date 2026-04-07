@@ -7,7 +7,7 @@ const statusCodes = require('http-status-codes')
 //get all tasks
 const getAllTasks = asyncErrorHaddler(async (req, res) => {
     //select user
-    const allTasks = await Tasks.find({ createdBy: req.user.id })
+    const allTasks = await Tasks.find({ createdBy: req.user.id }).sort({createdAt: -1})
     if (!allTasks) {
         throw new BadrequestErrorHaddler('Task Error')
     }
