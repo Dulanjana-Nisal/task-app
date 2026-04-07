@@ -3,6 +3,7 @@ import close_eye from '../../assets/svgs/close-eye.svg';
 import open_eye from '../../assets/svgs/open-eye.svg';
 import { useState } from 'react';
 import axios from 'axios';
+import { Link, Navigate } from 'react-router-dom';
 
 function Login(){
     const [visible,setVisible] = useState(true);
@@ -18,10 +19,10 @@ function Login(){
             console.log(user)
             localStorage.setItem('token', user.data.token);
             setErrMsg(null)
+            Navigate('/dashboard')
         }
         catch(err){ 
             setErrMsg(err.response.data.message)
-            console.log(err.response.data.message)
         }
     }
 
@@ -60,7 +61,7 @@ function Login(){
                     </form>
                 </div>
                 <div class="form-footer">
-                    <p>Dont have an account <a href="../register/register.html">Register</a></p>
+                    <p>Dont have an account <Link to="/register">Register</Link></p>
                 </div>
             </div>
         </div>
