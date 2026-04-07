@@ -1,6 +1,30 @@
 import './dashboard.css'
+import userSvg from '../../assets/svgs/user.svg';
+import plusSvg from '../../assets/svgs/plus.svg';
+import editSvg from '../../assets/edit.png';
+import deleteSvg from '../../assets/delete.png';
+import api from '../../api/api';
+import { useEffect, useState } from 'react';
 
 function Dashboard() {
+
+    const [userTasks,setUserTasks] = useState([])
+
+    useEffect( ()=>{
+        async function fetchTasks(){
+            try{
+                const userTask = await api.get('/tasks')
+                setUserTasks(userTask)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        fetchTasks();
+    }, [])
+
+    console.log(userTasks)
+
     return (
         <>
             <div class="dashboard-container">
@@ -9,7 +33,7 @@ function Dashboard() {
                         <h1>Dashboard</h1>
                     </div>
                     <div class="header-right">
-                        <img src="../images/svgs/user.svg" alt="user-profile" />
+                        <img src={userSvg} alt="user-profile" />
                         <h1>Dulanjana Nisal</h1>
                     </div>
                     <div class="profile">
@@ -19,7 +43,7 @@ function Dashboard() {
                 </div>
                 <div class="dashboard-body">
                     <div class="body-head">
-                        <button> <img src="../images/svgs/plus.svg" alt="" />Create Task</button>
+                        <button> <img src={plusSvg} alt="" />Create Task</button>
                     </div>
                     <div class="body-bottom">
                         <div class="task-card">
@@ -30,104 +54,8 @@ function Dashboard() {
                             </div>
                             <div class="card-body">
                                 <div class="card-body-left">
-                                    <button class="edit-btn"><img src="../images/edit.png" alt="" /></button>
-                                    <button class="delete-btn"><img src="../images/delete.png" alt="" /></button>
-                                </div>
-                                <div class="card-body-right">
-                                    <p>2026.01.03</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="task-card">
-                            <div class="card-head">
-                                <h1>Task Name</h1>
-                                <p>This is test task for task app dashboard</p>
-                                <p class="status">Pending</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-body-left">
-                                    <button class="edit-btn"><img src="../images/edit.png" alt="" /></button>
-                                    <button class="delete-btn"><img src="../images/delete.png" alt="" /></button>
-                                </div>
-                                <div class="card-body-right">
-                                    <p>2026.01.03</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="task-card">
-                            <div class="card-head">
-                                <h1>Task Name</h1>
-                                <p>This is test task for task app dashboard</p>
-                                <p class="status">Pending</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-body-left">
-                                    <button class="edit-btn"><img src="../images/edit.png" alt="" /></button>
-                                    <button class="delete-btn"><img src="../images/delete.png" alt="" /></button>
-                                </div>
-                                <div class="card-body-right">
-                                    <p>2026.01.03</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="task-card">
-                            <div class="card-head">
-                                <h1>Task Name</h1>
-                                <p>This is test task for task app dashboard</p>
-                                <p class="status">Pending</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-body-left">
-                                    <button class="edit-btn"><img src="../images/edit.png" alt="" /></button>
-                                    <button class="delete-btn"><img src="../images/delete.png" alt="" /></button>
-                                </div>
-                                <div class="card-body-right">
-                                    <p>2026.01.03</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="task-card">
-                            <div class="card-head">
-                                <h1>Task Name</h1>
-                                <p>This is test task for task app dashboard</p>
-                                <p class="status">Pending</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-body-left">
-                                    <button class="edit-btn"><img src="../images/edit.png" alt="" /></button>
-                                    <button class="delete-btn"><img src="../images/delete.png" alt="" /></button>
-                                </div>
-                                <div class="card-body-right">
-                                    <p>2026.01.03</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="task-card">
-                            <div class="card-head">
-                                <h1>Task Name</h1>
-                                <p>This is test task for task app dashboard</p>
-                                <p class="status">Pending</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-body-left">
-                                    <button class="edit-btn"><img src="../images/edit.png" alt="" /></button>
-                                    <button class="delete-btn"><img src="../images/delete.png" alt="" /></button>
-                                </div>
-                                <div class="card-body-right">
-                                    <p>2026.01.03</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="task-card">
-                            <div class="card-head">
-                                <h1>Task Name</h1>
-                                <p>This is test task for task app dashboard</p>
-                                <p class="status">Pending</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-body-left">
-                                    <button class="edit-btn"><img src="../images/edit.png" alt="" /></button>
-                                    <button class="delete-btn"><img src="../images/delete.png" alt="" /></button>
+                                    <button class="edit-btn"><img src={editSvg} alt="" /></button>
+                                    <button class="delete-btn"><img src={deleteSvg} alt="" /></button>
                                 </div>
                                 <div class="card-body-right">
                                     <p>2026.01.03</p>
