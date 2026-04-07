@@ -1,10 +1,10 @@
 import './login.css';
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LoginHeader from './loginHeader';
 import LoginBody from './loginBody';
 import LoginFooter from './loginFooter';
+import userApiLogin from '../../api/userApi';
 
 function Login(){
 
@@ -17,16 +17,7 @@ function Login(){
     //post login information
     const userLogin = async (e)=>{
         e.preventDefault();
-        try{
-            const user = await axios.post("http://localhost:5001/api/v1/user/login", {email,password})
-            console.log(user)
-            localStorage.setItem('token', user.data.token);
-            setErrMsg(null)
-            navigate('/dashboard')
-        }
-        catch(err){ 
-            setErrMsg(err.response.data.message)
-        }
+        userApiLogin(email,password,setErrMsg,navigate)
     }
 
     return(

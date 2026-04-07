@@ -195,7 +195,6 @@ function Dashboard() {
                         </form>
                     </div>
                 }
-                <div class="dashboard-footer"></div>
             </div>
         </>
     )
