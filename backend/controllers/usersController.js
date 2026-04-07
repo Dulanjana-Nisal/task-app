@@ -6,6 +6,10 @@ const statusCodes = require('http-status-codes')
 
 //user register
 const userRegisterController = asyncErrorHaddler(async (req,res)=>{
+    const {email,name,password} = req.body;
+    if(!name || !email || !password){
+        throw new BadrequestErrorHaddler('Please provide name, email and password!')
+    }
     const registerUser = await Users.create(req.body)
     res.status(200).send(registerUser)
 })

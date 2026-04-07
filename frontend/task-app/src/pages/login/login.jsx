@@ -3,13 +3,14 @@ import close_eye from '../../assets/svgs/close-eye.svg';
 import open_eye from '../../assets/svgs/open-eye.svg';
 import { useState } from 'react';
 import axios from 'axios';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login(){
     const [visible,setVisible] = useState(true);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [errMsg,setErrMsg] = useState(null)
+    const navigate = useNavigate();
 
     //post login information
     const userLogin = async (e)=>{
@@ -19,7 +20,7 @@ function Login(){
             console.log(user)
             localStorage.setItem('token', user.data.token);
             setErrMsg(null)
-            Navigate('/dashboard')
+            navigate('/dashboard')
         }
         catch(err){ 
             setErrMsg(err.response.data.message)
