@@ -18,7 +18,7 @@ const userRegisterController = asyncErrorHaddler(async (req,res)=>{
 const userLoginController = asyncErrorHaddler(async(req,res)=>{
     const {email,password} = req.body
     const userLogin = await Users.findOne({email: email})
-
+ 
     //check email and password
     if(!email || !password){
         throw new BadrequestErrorHaddler('Please provide email and password!')
