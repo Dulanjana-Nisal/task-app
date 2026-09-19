@@ -23,8 +23,8 @@ app.get('/api/v1/data', (req,res)=>{
 })
 
 //errors haddler
-app.use(errorHaddlerMiddleware);
-app.use(notfoundMiddleware)
+app.use(errorHaddlerMiddleware); 
+app.use(notfoundMiddleware) 
 
 //connections
 const PORT = process.env.PORT || 5001;

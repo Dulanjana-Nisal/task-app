@@ -4,10 +4,10 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci
+RUN mkdir -p node_modules/.vite && chown -R node:node /app
 
-COPY . .
+RUN npm install
 
-RUN npm run build
+COPY . . 
 
-CMD ['npm', 'run', 'dev', '--', 'host']
+USER node

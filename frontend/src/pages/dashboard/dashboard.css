@@ -7,9 +7,9 @@
 .dashboard-container .dashboard-header{
     width: 100%;
     padding: 25px 30px;
-    display: flex;
+    display: flex; 
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between;  
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .dashboard-container .dashboard-header .header-left h1{

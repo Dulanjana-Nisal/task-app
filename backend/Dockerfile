@@ -4,10 +4,10 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci --omit=dev
+RUN npm ci 
 
 COPY . .
 
-EXPOSE 5001
+USER node
 
-CMD ['node', 'server.js']
+CMD ["npm", "run", "dev"]

@@ -3,11 +3,12 @@ import open_eye from '../../assets/svgs/open-eye.svg';
 import changeVidible from '../../utils/buttons'
 
 function LoginBody({userLogin,email,setEmail,visible,setPassword,password,errMsg,setVisible}) {
+    console.log('hello world')
     return (
         <div class="form-body">
             <form onSubmit={userLogin}>
                 <div class="email">
-                    <label for="name">Email</label><br />
+                    <label for="name">Emails</label><br />
                     <input type="email" value={email} placeholder="Enter your Email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div class="password">

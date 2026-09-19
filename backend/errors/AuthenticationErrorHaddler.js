@@ -6,7 +6,7 @@ class AuthenticationErrorHaddler extends CustomErrorHaddler{
         super(message)
         this.status = statusCodes.UNAUTHORIZED
         this.code = 'UNAUTHORIZED'
-    }
+    } 
 }
 
 module.exports = AuthenticationErrorHaddler;
