@@ -1,7 +1,8 @@
 name: task-app
+
 services:
   mongodb:
-    image: mongo
+    image: mongo:8.0
     ports:
       - "27017:27017"
     environment:
@@ -11,9 +12,9 @@ services:
       - mongo_data:/data/db
     networks:
       - task-net
-
+  
   mongo-express:
-    image: mongo-express
+    image: mongo-express:1.0
     ports:
       - "8081:8081"
     environment:
@@ -24,16 +25,16 @@ services:
       ME_CONFIG_BASICAUTH_PASSWORD: "#D123u45l#"
     networks:
       - task-net
-    depends_on:
-      - mongodb
-
+    depends_on: 
+     - mongodb
+  
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
-    restart: unless-stopped
+      dockerfile: Dockerfile.dev
     ports:
       - "5001:5001"
+    restart: unless-stopped
     networks:
       - task-net
     volumes:
@@ -41,27 +42,26 @@ services:
       - /app/node_modules
     depends_on:
       - mongodb
+      - mongo-express
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "5173:5173"
     restart: unless-stopped
     networks:
       - task-net
-    environment:
-      CHOKIDAR_USEPOLLING: "true"
-    command: npm run dev -- --host
     volumes:
       - ./frontend:/app
       - /app/node_modules
     depends_on:
       - backend
+
 networks:
   task-net:
     driver: bridge
 
-volumes:
+volumes: 
   mongo_data:
