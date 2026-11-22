@@ -12,11 +12,11 @@ jobs:
     steps:
       # step 1: download codebase in to runner
       - name: Checkout repo
-        uses: action/checkout@v4
+        uses: actions/checkout@v4
       
       # step 2: Setup node environment
       - name: Setup node environment
-        uses: action/setup-node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
