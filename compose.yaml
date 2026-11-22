@@ -35,7 +35,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile.dev
     ports:
-      - 5001:5001
+      - "5001:5001"
     restart: unless-stopped
     env_file:
       - ./backend/.env
