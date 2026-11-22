@@ -10,4 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "First CI pipeline"
+      # step 1: download codebase in to runner
+      - name: Checkout repo
+        uses: action/checkout@v4
+      
+      # step 2: Setup node environment
+      - name: Setup node environment
+        uses: action/setup-node@v4
+        with:
+          node-version: '20'
+
+      # setup 3: Install dependency
+      - name: Install dependency
+        run: npm ci
+
+      # step 4: run test files or something
+      - name: Execute final result
+        run: echo "End of pipeline"
