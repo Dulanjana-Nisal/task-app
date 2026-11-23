@@ -22,7 +22,7 @@ jobs:
 
       # setup 3: Install dependency
       - name: Install dependency
-        run: npm ci
+        run: npm install
 
       # step 4: run test files or something
       - name: Execute final result
