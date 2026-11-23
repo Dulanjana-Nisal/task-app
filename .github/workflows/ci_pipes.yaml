@@ -63,4 +63,4 @@ jobs:
 
     steps:
       - name: Docker containerization
-        run: echo 'Docker containerizing...'
+        run: echo 'Building Docker image'
