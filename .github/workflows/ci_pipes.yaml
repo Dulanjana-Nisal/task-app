@@ -9,6 +9,10 @@ jobs:
   backend:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: backend
+
     steps:
       # step 1: download codebase in to runner
       - name: Checkout repo
