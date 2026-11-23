@@ -30,7 +30,7 @@ jobs:
 
       # step 4: run test files or something
       - name: Execute final result
-        run: echo "Backend running"
+        run: npm test
   
   frontend:
     runs-on: ubuntu-latest
@@ -56,4 +56,4 @@ jobs:
       
       # final step: End pipeline
       - name: Final Execute
-        run: echo 'Frontend running'
+        run: npm test
