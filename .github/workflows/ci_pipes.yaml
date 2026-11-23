@@ -22,12 +22,38 @@ jobs:
       - name: Setup node environment
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       # setup 3: Install dependency
       - name: Install dependency
-        run: npm install
+        run: npm ci
 
       # step 4: run test files or something
       - name: Execute final result
-        run: echo "End of pipeline"
+        run: echo "Backend running"
+  
+  frontend:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      # step 1: download code in to runner 
+      - name: Checkout code in to environment
+        uses: actions/checkout@v4
+
+      # step 2: setup node environment
+      - name: Setup node environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # step 3: Install dependency
+      - name: Install dependency
+        run: npm ci
+      
+      # final step: End pipeline
+      - name: Final Execute
+        run: echo 'Frontend running'
