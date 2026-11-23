@@ -1,40 +1,49 @@
-name: MERN Application CI
+name: Task App CI
 
 on:
   push:
     branches:
       - main
-      - dev/qa
   
   pull_request:
     branches:
       - main
-  
+
 jobs:
   backend-test:
+    name: Backend Test
+
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+    
     defaults:
       run:
         working-directory: backend
-    
+
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
-
+      
       - name: Setup node environment
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      
+        
       - name: Install dependency
         run: npm ci
 
-      - name:  Run tests
+      - name: Run tests
         run: npm test
   
   frontend-test:
+    name: Frontend Test
+
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
 
     defaults:
       run:
@@ -51,6 +60,9 @@ jobs:
         
       - name: Install dependency
         run: npm ci
-
-      - name: Run test
+      
+      - name: Run tests
         run: npm test
+
+      - name: Build application
+        run: npm run build
