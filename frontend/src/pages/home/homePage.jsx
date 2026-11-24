@@ -1,0 +1,13 @@
+import './homePage.css'
+
+function HomePage() {
+    return (
+        <>
+            <div class="home-container">
+                <h1>Welcome to home page!</h1>
+            </div>
+        </>
+    )
+}
+
+export default HomePage;
